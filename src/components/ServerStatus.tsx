@@ -7,30 +7,32 @@ export default function ServerStatusComponent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulated server status - replace with real BattleMetrics/CFTools API
     const fetchStatus = async () => {
       try {
-        // TODO: Replace with actual API call
-        // const res = await fetch('https://api.battlemetrics.com/servers/YOUR_SERVER_ID');
-        // const data = await res.json();
+        const res = await fetch('/api/server-status');
+        if (!res.ok) {
+          throw new Error('Failed to fetch server status');
+        }
+        const data = await res.json();
+        setStatus(data);
+      } catch (error) {
+        // Fallback to default values if API fails
         setStatus({
           name: 'LAST BULLET DayZ',
           map: 'Chernarus',
-          players: 42,
+          players: 0,
           maxPlayers: 60,
-          online: true,
-          ip: '0.0.0.0',
+          online: false,
+          ip: '88.99.253.242',
           port: 2302,
         });
-      } catch {
-        setStatus(null);
       } finally {
         setLoading(false);
       }
     };
 
     fetchStatus();
-    const interval = setInterval(fetchStatus, 60000);
+    const interval = setInterval(fetchStatus, 60000); // Update every minute
     return () => clearInterval(interval);
   }, []);
 
