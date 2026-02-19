@@ -9,7 +9,7 @@ export default function ServerStatusComponent() {
   const connectToServer = (ip: string, port: number) => {
     const serverAddress = `${ip}:${port}`;
     
-    // Try DZSA Launcher first
+    // Try DZSA Launcher
     const dzsaUrl = `dzsa://connect/${serverAddress}`;
     const dzsaLink = document.createElement('a');
     dzsaLink.href = dzsaUrl;
@@ -19,7 +19,7 @@ export default function ServerStatusComponent() {
     try {
       dzsaLink.click();
     } catch (error) {
-      console.log('DZSA Launcher not available, trying Steam');
+      console.log('DZSA Launcher not available');
     }
     
     // Remove DZSA link after a short delay
@@ -27,35 +27,14 @@ export default function ServerStatusComponent() {
       if (document.body.contains(dzsaLink)) {
         document.body.removeChild(dzsaLink);
       }
-    }, 100);
-    
-    // Also try Steam/DayZ Launcher as fallback
-    // Steam will handle it if DZSA is not installed
-    setTimeout(() => {
-      const steamUrl = `steam://connect/${serverAddress}`;
-      const steamLink = document.createElement('a');
-      steamLink.href = steamUrl;
-      steamLink.style.display = 'none';
-      document.body.appendChild(steamLink);
       
-      try {
-        steamLink.click();
-      } catch (error) {
-        console.log('Steam Launcher not available, copying to clipboard');
-        // Final fallback: copy to clipboard
-        navigator.clipboard.writeText(serverAddress).then(() => {
-          alert(`Server-Adresse kopiert: ${serverAddress}\n\nFalls der Launcher nicht automatisch geöffnet wurde, füge die Adresse manuell in deinen Launcher ein.`);
-        }).catch(() => {
-          alert(`Server-Adresse: ${serverAddress}\n\nBitte kopiere die Adresse manuell in deinen Launcher.`);
-        });
-      }
-      
-      setTimeout(() => {
-        if (document.body.contains(steamLink)) {
-          document.body.removeChild(steamLink);
-        }
-      }, 100);
-    }, 200);
+      // Fallback: copy to clipboard if DZSA didn't open
+      navigator.clipboard.writeText(serverAddress).then(() => {
+        alert(`Server-Adresse kopiert: ${serverAddress}\n\nFalls der DZSA Launcher nicht automatisch geöffnet wurde, füge die Adresse manuell ein.`);
+      }).catch(() => {
+        alert(`Server-Adresse: ${serverAddress}\n\nBitte kopiere die Adresse manuell in deinen DZSA Launcher.`);
+      });
+    }, 500);
   };
 
   useEffect(() => {
