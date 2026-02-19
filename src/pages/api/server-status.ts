@@ -8,7 +8,71 @@ const QUERY_PORT = 2303;
 async function queryDayZServer(ip: string, queryPort: number) {
   // Try multiple query methods for reliability
   const queryMethods = [
-    // Method 1: GameTracker API (most reliable for DayZ)
+    // Method 1: DecAPI - Specialized DayZ server query API
+    async () => {
+      // Try with query port 27016 (default DayZ query port)
+      const queryPorts = [27016, queryPort, 27017, 27018];
+      
+      for (const qPort of queryPorts) {
+        try {
+          const response = await fetch(
+            `https://decapi.me/dayz/players?ip=${ip}&port=${SERVER_PORT}&query=${qPort}`,
+            {
+              headers: { 'Accept': 'text/plain' },
+              signal: AbortSignal.timeout(5000),
+            }
+          );
+          
+          if (!response.ok) continue;
+          
+          const text = await response.text();
+          // Format is usually "X/Y" where X is current players, Y is max players
+          const match = text.match(/(\d+)\/(\d+)/);
+          
+          if (match) {
+            const players = parseInt(match[1], 10);
+            const maxPlayers = parseInt(match[2], 10);
+            
+            return {
+              name: 'LAST BULLET DayZ',
+              map: 'Chernarus',
+              players: players,
+              maxPlayers: maxPlayers,
+              online: true,
+              ip: SERVER_IP,
+              port: SERVER_PORT,
+            };
+          }
+        } catch (error) {
+          continue;
+        }
+      }
+      throw new Error('DecAPI failed');
+    },
+    // Method 2: DecAPI Server Info (alternative endpoint)
+    async () => {
+      const response = await fetch(
+        `https://decapi.me/dayz/info?ip=${ip}&port=${SERVER_PORT}&query=${queryPort}`,
+        {
+          headers: { 'Accept': 'application/json' },
+          signal: AbortSignal.timeout(5000),
+        }
+      );
+      
+      if (!response.ok) throw new Error('DecAPI info failed');
+      const data = await response.json();
+      
+      return {
+        name: data.name || 'LAST BULLET DayZ',
+        map: data.map || 'Chernarus',
+        players: parseInt(data.players || '0', 10),
+        maxPlayers: parseInt(data.maxplayers || '60', 10),
+        online: true,
+        ip: SERVER_IP,
+        port: SERVER_PORT,
+      };
+    },
+    // Method 3: GameTracker API (most reliable for DayZ)
     async () => {
       const response = await fetch(
         `https://api.gametracker.com/server_info/${ip}:${queryPort}/?format=json`,
@@ -113,31 +177,43 @@ async function queryDayZServer(ip: string, queryPort: number) {
 
   // Try each method until one succeeds
   let lastError: Error | null = null;
+  let lastResult: any = null;
+  
   for (const method of queryMethods) {
     try {
       const result = await method();
-      // If we got valid data (even if offline flag), return it
-      if (result) {
-        // If players > 0, definitely online
-        if (result.players > 0) {
-          result.online = true;
-        }
+      // If we got valid data, return it immediately
+      if (result && typeof result.players === 'number' && result.players >= 0) {
+        // Ensure online status is correct
+        result.online = result.online || result.players > 0;
+        console.log('Successfully fetched server status:', result);
         return result;
+      }
+      // Store last valid result even if players is 0
+      if (result) {
+        lastResult = result;
       }
     } catch (error) {
       lastError = error as Error;
+      console.warn('Query method failed:', error);
       // Continue to next method
       continue;
     }
   }
 
-  // If all methods fail, assume server is online (user confirmed it's online)
+  // If we got a result but with 0 players, return it (server might be empty but online)
+  if (lastResult) {
+    console.log('Using last result with 0 players:', lastResult);
+    return lastResult;
+  }
+
+  // If all methods fail completely, assume server is online but player count unknown
   // This prevents false "offline" status when APIs are unavailable
   console.warn('All query methods failed, assuming server is online. Last error:', lastError?.message);
   return {
     name: 'LAST BULLET DayZ',
     map: 'Chernarus',
-    players: 0, // Unknown player count
+    players: 0, // Unknown player count - APIs unavailable
     maxPlayers: 60,
     online: true, // Assume online - user confirmed server is online
     ip: SERVER_IP,
@@ -160,7 +236,7 @@ export const GET: APIRoute = async () => {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=15', // Shorter cache for more frequent updates
+        'Cache-Control': 'no-cache, no-store, must-revalidate', // No cache for real-time updates
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET',
       },
@@ -188,7 +264,7 @@ export const GET: APIRoute = async () => {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET',
-          'Cache-Control': 'public, s-maxage=30',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
         },
       }
     );
