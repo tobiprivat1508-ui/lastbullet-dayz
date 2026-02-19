@@ -51,11 +51,6 @@ export const ui = {
     // Contact
     'contact.title': 'Kontakt',
     'contact.subtitle': 'Hast du Fragen? Schreib uns!',
-    'contact.name': 'Name',
-    'contact.email': 'E-Mail',
-    'contact.message': 'Nachricht',
-    'contact.send': 'Absenden',
-    'contact.discord': 'Oder tritt unserem Discord bei',
 
     // Server Status
     'status.online': 'Online',
@@ -115,11 +110,6 @@ export const ui = {
     // Contact
     'contact.title': 'Contact',
     'contact.subtitle': 'Have questions? Get in touch!',
-    'contact.name': 'Name',
-    'contact.email': 'Email',
-    'contact.message': 'Message',
-    'contact.send': 'Submit',
-    'contact.discord': 'Or join our Discord',
 
     // Server Status
     'status.online': 'Online',
