@@ -1,0 +1,68 @@
+---
+const rules = [
+  {
+    title: 'Kein Pay-to-Win',
+    content: 'Es werden keine spielentscheidenden Vorteile verkauft. Waffen, Munition, Fahrzeuge, Loot oder sonstige gameplay-relevante Items sind nicht käuflich. Jeder Spieler hat die gleichen Chancen – unabhängig von finanzieller Unterstützung.',
+  },
+  {
+    title: 'Nur kosmetische Vorteile',
+    content: 'Supporter-Pakete enthalten ausschließlich kosmetische Inhalte: Custom Skins, spezielle Titel, Supporter-Rollen im Discord, Priority Queue beim Server-Join. Keine dieser Vorteile beeinflusst das Spielgeschehen.',
+  },
+  {
+    title: 'Freiwilligkeit',
+    content: 'Alle Zahlungen sind freiwillig. Niemand muss für den Server zahlen, um vollständig mitspielen zu können. Spenden und Supporter-Pakete dienen ausschließlich der Unterstützung des Servers.',
+  },
+  {
+    title: 'Transparenz',
+    content: 'Einnahmen aus der Monetarisierung fließen in Server-Kosten (Hosting, Mods, Entwicklung) und Community-Belange. Keine Haftung für Loot-, Fahrzeug- oder Charakterverluste. Kein Anspruch auf Ersatz bei Server-Ausfällen.',
+  },
+  {
+    title: 'Keine Rückerstattung',
+    content: 'Einmal getätigte Spenden oder Supporter-Käufe sind nicht erstattungsfähig. Mit dem Kauf akzeptierst du diese Bedingungen. Bei technischen Problemen oder Fragen wende dich an den Support.',
+  },
+  {
+    title: 'Account-Bindung',
+    content: 'Supporter-Vorteile sind an den jeweiligen Account gebunden. Bei Regelverstößen können Supporter-Vorteile entzogen werden, ohne Anspruch auf Rückerstattung.',
+  },
+  {
+    title: 'Änderungen vorbehalten',
+    content: 'Das Server-Team behält sich vor, Monetarisierungs-Angebote, Preise und Vorteile anzupassen. Bestehende Supporter behalten ihre erworbenen Vorteile bis zum Ablauf der Laufzeit.',
+  },
+];
+---
+
+<section id="monetization-rules" class="py-24 bg-surface/50 relative worn-texture">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <p class="hud-label mb-3">// MONETARISIERUNG :: SEC.05</p>
+      <h2 class="text-4xl sm:text-5xl font-bold mb-4">Monetarisierungs-Regeln</h2>
+      <p class="text-text-secondary text-lg">Grundregeln für unser Supporter-Programm</p>
+      <div class="mil-divider mt-6">
+        <span class="w-2 h-2 rotate-45 bg-accent" />
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      {rules.map((rule, i) => (
+        <details class="group bg-surface border border-border rounded-xl overflow-hidden hover:border-accent/30 transition-colors">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+            <div class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-lg bg-accent/10 text-accent flex items-center justify-center font-[family-name:var(--font-military)] text-sm shrink-0">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="font-semibold text-lg group-hover:text-accent transition-colors">{rule.title}</h3>
+            </div>
+            <svg class="w-5 h-5 text-text-muted group-open:rotate-180 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-6 pt-0">
+            <div class="pl-12 text-text-secondary leading-relaxed border-t border-border pt-4">
+              {rule.content}
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
