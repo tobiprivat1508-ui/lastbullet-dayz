@@ -5,13 +5,75 @@ import { languages } from '../i18n/ui';
 const lang = getLangFromUrl(Astro.url);
 const otherLang = lang === 'de' ? 'en' : 'de';
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '') || '/';
+const currentFlag = lang === 'de' ? '🇩🇪' : '🇬🇧';
+const otherFlag = otherLang === 'de' ? '🇩🇪' : '🇬🇧';
 ---
 
-<a
-  href={`/${otherLang}${currentPath}`}
-  class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border hover:border-accent-red/50 text-text-secondary hover:text-text-primary transition-all duration-300 text-sm"
-  aria-label={`Switch to ${languages[otherLang]}`}
->
-  <span class="text-base">{otherLang === 'de' ? '🇩🇪' : '🇬🇧'}</span>
-  <span>{languages[otherLang]}</span>
-</a>
+<div class="relative" id="lang-switcher">
+  <button
+    id="lang-btn"
+    class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border hover:border-accent/50 text-text-secondary hover:text-text-primary transition-all duration-300 text-sm cursor-pointer"
+    aria-label="Change language"
+    aria-expanded="false"
+  >
+    <span class="text-base">{currentFlag}</span>
+    <span class="uppercase font-medium">{lang}</span>
+    <svg class="w-3.5 h-3.5 transition-transform duration-200" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  </button>
+
+  <div
+    id="lang-dropdown"
+    class="absolute right-0 top-full mt-2 w-40 bg-surface border border-border rounded-lg shadow-xl shadow-black/30 overflow-hidden opacity-0 pointer-events-none translate-y-1 transition-all duration-200 z-50"
+  >
+    <!-- Current language -->
+    <div class="flex items-center gap-3 px-4 py-2.5 text-sm text-accent bg-accent/5 border-b border-border">
+      <span class="text-base">{currentFlag}</span>
+      <span class="font-medium">{languages[lang]}</span>
+      <svg class="w-4 h-4 ml-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5" />
+      </svg>
+    </div>
+    <!-- Other language -->
+    <a
+      href={`/${otherLang}${currentPath}`}
+      class="flex items-center gap-3 px-4 py-2.5 text-sm text-text-secondary hover:text-text-primary hover:bg-white/5 transition-colors"
+    >
+      <span class="text-base">{otherFlag}</span>
+      <span>{languages[otherLang]}</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('lang-btn');
+  const dropdown = document.getElementById('lang-dropdown');
+  const chevron = document.getElementById('lang-chevron');
+
+  if (btn && dropdown && chevron) {
+    btn.addEventListener('click', () => {
+      const open = dropdown.classList.contains('pointer-events-none');
+      if (open) {
+        dropdown.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-1');
+        dropdown.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        chevron.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        dropdown.classList.add('opacity-0', 'pointer-events-none', 'translate-y-1');
+        dropdown.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        chevron.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!(e.target as HTMLElement).closest('#lang-switcher')) {
+        dropdown.classList.add('opacity-0', 'pointer-events-none', 'translate-y-1');
+        dropdown.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        chevron.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+</script>
