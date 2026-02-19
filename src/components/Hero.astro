@@ -1,5 +1,6 @@
 ---
 import Button from './ui/Button.astro';
+import HeroServerStatus from './HeroServerStatus.tsx';
 ---
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -37,16 +38,7 @@ import Button from './ui/Button.astro';
   <!-- Content -->
   <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
     <!-- Status badge (HUD-style) -->
-    <div class="inline-flex items-center gap-3 px-5 py-2 rounded border border-white/10 bg-black/40 backdrop-blur-sm mb-8 animate-fade-in font-mono text-xs tracking-wider">
-      <span class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-        <span class="text-accent-green uppercase">Server Status: Online</span>
-      </span>
-      <span class="text-white/20">|</span>
-      <span class="text-white/40">42/60</span>
-      <span class="text-white/20">|</span>
-      <span class="text-white/40">Chernarus</span>
-    </div>
+    <HeroServerStatus client:load />
 
     <!-- Logo -->
     <img src="/images/logo.png" alt="Last Bullet DayZ" class="w-40 h-40 sm:w-52 sm:h-52 mx-auto mb-6 drop-shadow-[0_0_40px_rgba(232,121,29,0.35)] animate-fade-in" />
