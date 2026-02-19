@@ -1,36 +1,32 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import Card from './ui/Card.astro';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 
 const cards = [
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>`,
-    title: t('about.card1.title'),
-    desc: t('about.card1.desc'),
+    title: 'Hardcore PvP',
+    desc: 'Intensive Feuergefechte und taktisches Gameplay für erfahrene Überlebende.',
     stat: '100%',
     statLabel: 'PVP',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275z"/></svg>`,
-    title: t('about.card2.title'),
-    desc: t('about.card2.desc'),
+    title: 'Custom Mods',
+    desc: 'Sorgfältig ausgewählte Mods für das ultimative DayZ-Erlebnis.',
     stat: '50+',
     statLabel: 'MODS',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    title: t('about.card3.title'),
-    desc: t('about.card3.desc'),
+    title: 'Aktive Community',
+    desc: 'Tritt unserer wachsenden Discord-Community bei und finde neue Verbündete.',
     stat: '500+',
-    statLabel: lang === 'de' ? 'SPIELER' : 'PLAYERS',
+    statLabel: 'SPIELER',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>`,
-    title: t('about.card4.title'),
-    desc: t('about.card4.desc'),
+    title: 'Aktive Admins',
+    desc: 'Unser engagiertes Team sorgt für faires Gameplay und schnelle Hilfe.',
     stat: '24/7',
     statLabel: 'ONLINE',
   },
@@ -41,9 +37,9 @@ const cards = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Section Header with HUD styling -->
     <div class="text-center mb-16">
-      <p class="hud-label mb-3">// {lang === 'de' ? 'DATENBANK' : 'DATABASE'} :: SEC.01</p>
-      <h2 class="text-4xl sm:text-5xl font-bold mb-4">{t('about.title')}</h2>
-      <p class="text-text-secondary text-lg">{t('about.subtitle')}</p>
+      <p class="hud-label mb-3">// DATENBANK :: SEC.01</p>
+      <h2 class="text-4xl sm:text-5xl font-bold mb-4">Über unseren Server</h2>
+      <p class="text-text-secondary text-lg">Was uns besonders macht</p>
       <div class="mil-divider mt-6">
         <span class="w-2 h-2 rotate-45 bg-accent" />
       </div>

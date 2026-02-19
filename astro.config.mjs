@@ -12,26 +12,9 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
 
-  i18n: {
-    defaultLocale: 'de',
-    locales: ['de', 'en'],
-    routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
-    },
-  },
-
   integrations: [
     react(),
-    sitemap({
-      i18n: {
-        defaultLocale: 'de',
-        locales: {
-          de: 'de-DE',
-          en: 'en-US',
-        },
-      },
-    }),
+    sitemap(),
   ],
 
   vite: {

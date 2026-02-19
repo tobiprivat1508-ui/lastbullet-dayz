@@ -1,38 +1,29 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import Badge from './ui/Badge.astro';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const freeFeatures = lang === 'de'
-  ? ['Voller Server-Zugang', 'Alle Gameplay-Features', 'Community-Events', 'Discord-Support']
-  : ['Full server access', 'All gameplay features', 'Community events', 'Discord support'];
-
-const cosmeticFeatures = lang === 'de'
-  ? ['Custom Skins', 'Spezielle Titel', 'Priority Queue', 'Supporter-Rolle']
-  : ['Custom skins', 'Special titles', 'Priority queue', 'Supporter role'];
+const freeFeatures = ['Voller Server-Zugang', 'Alle Gameplay-Features', 'Community-Events', 'Discord-Support'];
+const cosmeticFeatures = ['Custom Skins', 'Spezielle Titel', 'Priority Queue', 'Supporter-Rolle'];
 ---
 
 <section id="monetization" class="py-24 relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <p class="hud-label mb-3">// {lang === 'de' ? 'VERSORGUNG' : 'SUPPLY'} :: SEC.03</p>
-      <h2 class="text-4xl sm:text-5xl font-bold mb-4">{t('monetization.title')}</h2>
-      <p class="text-text-secondary text-lg">{t('monetization.subtitle')}</p>
+      <p class="hud-label mb-3">// VERSORGUNG :: SEC.03</p>
+      <h2 class="text-4xl sm:text-5xl font-bold mb-4">Finanzierung</h2>
+      <p class="text-text-secondary text-lg">Transparent & Fair</p>
       <div class="mil-divider mt-6">
         <span class="w-2 h-2 rotate-45 bg-accent" />
       </div>
     </div>
 
-    <p class="text-center text-text-secondary max-w-2xl mx-auto mb-12">{t('monetization.desc')}</p>
+    <p class="text-center text-text-secondary max-w-2xl mx-auto mb-12">Unser Server wird durch freiwillige Spenden finanziert. Alle Vorteile sind rein kosmetisch – kein Pay-to-Win.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
       <!-- Free Tier -->
       <div class="bg-surface border border-border rounded-xl p-8 hover:border-accent-green/50 transition-all duration-300">
         <div class="flex items-center gap-3 mb-6">
           <Badge variant="green">Free</Badge>
-          <h3 class="text-xl font-bold">{lang === 'de' ? 'Kostenlos' : 'Free'}</h3>
+          <h3 class="text-xl font-bold">Kostenlos</h3>
         </div>
         <ul class="space-y-3">
           {freeFeatures.map((feature) => (
@@ -52,7 +43,7 @@ const cosmeticFeatures = lang === 'de'
         <div class="relative">
           <div class="flex items-center gap-3 mb-6">
             <Badge variant="red">Supporter</Badge>
-            <h3 class="text-xl font-bold">{lang === 'de' ? 'Kosmetisch' : 'Cosmetic'}</h3>
+            <h3 class="text-xl font-bold">Kosmetisch</h3>
           </div>
           <ul class="space-y-3">
             {cosmeticFeatures.map((feature) => (

@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-interface Props {
-  lang: 'de' | 'en';
-}
-
-export default function LiveMap({ lang }: Props) {
+export default function LiveMap() {
   const [loading, setLoading] = useState(true);
 
   return (
@@ -20,7 +16,7 @@ export default function LiveMap({ lang }: Props) {
           <div className="absolute inset-0 flex items-center justify-center bg-[#141414] z-10">
             <div className="flex flex-col items-center gap-3">
               <div className="w-8 h-8 border-2 border-[#e8791d] border-t-transparent rounded-full animate-spin" />
-              <p className="text-sm text-[#666]">{lang === 'de' ? 'Karte wird geladen...' : 'Loading map...'}</p>
+              <p className="text-sm text-[#666]">Karte wird geladen...</p>
             </div>
           </div>
         )}
@@ -33,7 +29,7 @@ export default function LiveMap({ lang }: Props) {
         />
       </div>
       <p className="text-center text-sm text-[#666] mt-4">
-        {lang === 'de' ? 'Powered by iZurvive' : 'Powered by iZurvive'}
+        Powered by iZurvive
       </p>
     </motion.div>
   );

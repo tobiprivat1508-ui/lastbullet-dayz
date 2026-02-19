@@ -1,39 +1,24 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import Card from './ui/Card.astro';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const features = lang === 'de'
-  ? [
-      { icon: '🔫', title: 'PvP-Zonen', desc: 'Definierte Kampfzonen für intensive Feuergefechte' },
-      { icon: '🏠', title: 'Basebuilding', desc: 'Baue und befestige deine eigene Basis' },
-      { icon: '🚗', title: 'Fahrzeuge', desc: 'Modifizierte Fahrzeuge und Helikopter' },
-      { icon: '💀', title: 'Hardcore Loot', desc: 'Angepasste Loot-Tabellen für echte Herausforderung' },
-      { icon: '🗺️', title: 'Custom Areas', desc: 'Einzigartige Points of Interest auf der Karte' },
-      { icon: '🎯', title: 'Events', desc: 'Regelmäßige Community-Events und Turniere' },
-      { icon: '📡', title: 'Traders', desc: 'Händler-System zum Kaufen und Verkaufen' },
-      { icon: '⚔️', title: 'Raids', desc: 'Geplante Raid-Zeiten für Base-Raids' },
-    ]
-  : [
-      { icon: '🔫', title: 'PvP Zones', desc: 'Defined combat zones for intense firefights' },
-      { icon: '🏠', title: 'Base Building', desc: 'Build and fortify your own base' },
-      { icon: '🚗', title: 'Vehicles', desc: 'Modified vehicles and helicopters' },
-      { icon: '💀', title: 'Hardcore Loot', desc: 'Adjusted loot tables for real challenge' },
-      { icon: '🗺️', title: 'Custom Areas', desc: 'Unique points of interest on the map' },
-      { icon: '🎯', title: 'Events', desc: 'Regular community events and tournaments' },
-      { icon: '📡', title: 'Traders', desc: 'Trader system for buying and selling' },
-      { icon: '⚔️', title: 'Raids', desc: 'Scheduled raid times for base raids' },
-    ];
+const features = [
+  { icon: '🔫', title: 'PvP-Zonen', desc: 'Definierte Kampfzonen für intensive Feuergefechte' },
+  { icon: '🏠', title: 'Basebuilding', desc: 'Baue und befestige deine eigene Basis' },
+  { icon: '🚗', title: 'Fahrzeuge', desc: 'Modifizierte Fahrzeuge und Helikopter' },
+  { icon: '💀', title: 'Hardcore Loot', desc: 'Angepasste Loot-Tabellen für echte Herausforderung' },
+  { icon: '🗺️', title: 'Custom Areas', desc: 'Einzigartige Points of Interest auf der Karte' },
+  { icon: '🎯', title: 'Events', desc: 'Regelmäßige Community-Events und Turniere' },
+  { icon: '📡', title: 'Traders', desc: 'Händler-System zum Kaufen und Verkaufen' },
+  { icon: '⚔️', title: 'Raids', desc: 'Geplante Raid-Zeiten für Base-Raids' },
+];
 ---
 
 <section id="features" class="py-24 bg-surface/50 relative worn-texture">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="text-center mb-16">
-      <p class="hud-label mb-3">// {lang === 'de' ? 'AUSRÜSTUNG' : 'EQUIPMENT'} :: SEC.02</p>
-      <h2 class="text-4xl sm:text-5xl font-bold mb-4">{t('features.title')}</h2>
-      <p class="text-text-secondary text-lg">{t('features.subtitle')}</p>
+      <p class="hud-label mb-3">// AUSRÜSTUNG :: SEC.02</p>
+      <h2 class="text-4xl sm:text-5xl font-bold mb-4">Server Features</h2>
+      <p class="text-text-secondary text-lg">Das bieten wir dir</p>
       <div class="mil-divider mt-6">
         <span class="w-2 h-2 rotate-45 bg-accent" />
       </div>

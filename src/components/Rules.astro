@@ -1,78 +1,42 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const rules = lang === 'de'
-  ? [
-      {
-        title: 'Allgemeines',
-        content: 'Respekt & Fairness stehen an erster Stelle. Serverbelastende Aktionen oder Bauweisen sind verboten. Exploits, Glitches, Duping und Cheats sind strengstens untersagt. Bauen ist nur an physikalisch möglichen Positionen erlaubt. Server-Schilder sind bindend. Stream-Sniping ist verboten. Handlungen gegen Fairness oder gesunden Menschenverstand sind nicht erlaubt. Ausloggen in Bunkern, deren Umgebung oder Event-Locations ist untersagt.',
-      },
-      {
-        title: 'Chat & Kommunikation',
-        content: 'Serversprache: Deutsch & Englisch. Keine Beleidigungen, Provokationen, Hetze, Diskriminierung, Spam, Capslock oder Regel-Diskussionen. PvP-, Raid- oder Kill-Situationen nicht im Global-Chat klären. Verdächtiges Verhalten nur über den Support melden. Keine PvP-Aufrufe im Global-Chat. Keine Weitergabe von Spieler-, Gruppen- oder Base-Positionen. Regelverstöße können zu Chat-Mutes führen.',
-      },
-      {
-        title: 'Spielverhalten & PvP',
-        content: 'Spiele fair, respektvoll und ehrenhaft. Safezone-Camping oder PvP in Safezones ist verboten. Wer einen Konflikt beginnt, muss mit Gegenwehr rechnen. Erhöhtes PvP bei Militärzonen, Basen, Missionen, Events & Airdrops. Gruppen dürfen sich nicht zusammenschließen!',
-      },
-      {
-        title: 'Beweissicherung',
-        content: 'PvP- & Kill-Aufzeichnungen werden dringend empfohlen. Fehlende Beweise können zu Entscheidungen zulasten des Angreifers führen.',
-      },
-      {
-        title: 'Bauen & Basen',
-        content: 'Basengröße muss zur Spieleranzahl passen. Über 3 Stockwerke oder Umbauten an Map-Gebäuden nur mit Support-Genehmigung. Alle Bauteile benötigen festen Bodenkontakt. Mindestabstand zu Militär, Krankenhäusern, Polizeistationen, Händlern, Safezones, ATMs & Zementmischern: 500–1000 m. Kein Bauen an serverseitigen Orten (Bunker, Events etc.).',
-      },
-      {
-        title: 'Raids & Safebases',
-        content: 'Raids sind erlaubt, wenn sie regelkonform ablaufen. Offene Türen oder Baufehler = Raid erlaubt. Ausloggen in fremden Basen nach Raids ist verboten. Raid-Aufzeichnungen sind Pflicht.',
-      },
-      {
-        title: 'Haftung & Sonderfälle',
-        content: 'Mod-Updates können jederzeit Neustarts verursachen. Neustarts werden meist 120 Sekunden vorher angekündigt. Keine Haftung für Loot-, Fahrzeug- oder Charakterverluste. Kein Anspruch auf Ersatz oder Bug-Befreiung. Nicht geregelte Fälle entscheidet das Server-Team verbindlich.',
-      },
-    ]
-  : [
-      {
-        title: 'General Rules',
-        content: 'Respect & fairness come first. Server-straining actions or builds are prohibited. Exploits, glitches, duping and cheats are strictly forbidden. Building is only allowed at physically possible positions. Server signs are binding. Stream sniping is prohibited. Actions against fairness or common sense are not allowed. Logging out in bunkers, their surroundings or event locations is prohibited.',
-      },
-      {
-        title: 'Chat & Communication',
-        content: 'Server languages: German & English. No insults, provocations, hate speech, discrimination, spam, caps lock or rule discussions. Do not resolve PvP, raid or kill situations in global chat. Report suspicious behavior only through support. No PvP calls in global chat. No sharing of player, group or base positions. Rule violations may result in chat mutes.',
-      },
-      {
-        title: 'Gameplay & PvP',
-        content: 'Play fair, respectfully and honorably. Safezone camping or PvP in safezones is prohibited. If you start a conflict, expect retaliation. Increased PvP at military zones, bases, missions, events & airdrops. Groups must not ally with each other!',
-      },
-      {
-        title: 'Evidence',
-        content: 'PvP & kill recordings are strongly recommended. Missing evidence may lead to decisions against the attacker.',
-      },
-      {
-        title: 'Building & Bases',
-        content: 'Base size must match the number of players. Over 3 floors or modifications to map buildings require support approval. All building parts need solid ground contact. Minimum distance to military, hospitals, police stations, traders, safezones, ATMs & cement mixers: 500–1000 m. No building at server-side locations (bunkers, events etc.).',
-      },
-      {
-        title: 'Raids & Safebases',
-        content: 'Raids are allowed if they follow the rules. Open doors or building errors = raid allowed. Logging out in enemy bases after raids is prohibited. Raid recordings are mandatory.',
-      },
-      {
-        title: 'Liability & Special Cases',
-        content: 'Mod updates may cause restarts at any time. Restarts are usually announced 120 seconds in advance. No liability for loot, vehicle or character losses. No entitlement to replacement or bug exemption. Unregulated cases are decided by the server team with binding authority.',
-      },
-    ];
+const rules = [
+  {
+    title: 'Allgemeines',
+    content: 'Respekt & Fairness stehen an erster Stelle. Serverbelastende Aktionen oder Bauweisen sind verboten. Exploits, Glitches, Duping und Cheats sind strengstens untersagt. Bauen ist nur an physikalisch möglichen Positionen erlaubt. Server-Schilder sind bindend. Stream-Sniping ist verboten. Handlungen gegen Fairness oder gesunden Menschenverstand sind nicht erlaubt. Ausloggen in Bunkern, deren Umgebung oder Event-Locations ist untersagt.',
+  },
+  {
+    title: 'Chat & Kommunikation',
+    content: 'Serversprache: Deutsch & Englisch. Keine Beleidigungen, Provokationen, Hetze, Diskriminierung, Spam, Capslock oder Regel-Diskussionen. PvP-, Raid- oder Kill-Situationen nicht im Global-Chat klären. Verdächtiges Verhalten nur über den Support melden. Keine PvP-Aufrufe im Global-Chat. Keine Weitergabe von Spieler-, Gruppen- oder Base-Positionen. Regelverstöße können zu Chat-Mutes führen.',
+  },
+  {
+    title: 'Spielverhalten & PvP',
+    content: 'Spiele fair, respektvoll und ehrenhaft. Safezone-Camping oder PvP in Safezones ist verboten. Wer einen Konflikt beginnt, muss mit Gegenwehr rechnen. Erhöhtes PvP bei Militärzonen, Basen, Missionen, Events & Airdrops. Gruppen dürfen sich nicht zusammenschließen!',
+  },
+  {
+    title: 'Beweissicherung',
+    content: 'PvP- & Kill-Aufzeichnungen werden dringend empfohlen. Fehlende Beweise können zu Entscheidungen zulasten des Angreifers führen.',
+  },
+  {
+    title: 'Bauen & Basen',
+    content: 'Basengröße muss zur Spieleranzahl passen. Über 3 Stockwerke oder Umbauten an Map-Gebäuden nur mit Support-Genehmigung. Alle Bauteile benötigen festen Bodenkontakt. Mindestabstand zu Militär, Krankenhäusern, Polizeistationen, Händlern, Safezones, ATMs & Zementmischern: 500–1000 m. Kein Bauen an serverseitigen Orten (Bunker, Events etc.).',
+  },
+  {
+    title: 'Raids & Safebases',
+    content: 'Raids sind erlaubt, wenn sie regelkonform ablaufen. Offene Türen oder Baufehler = Raid erlaubt. Ausloggen in fremden Basen nach Raids ist verboten. Raid-Aufzeichnungen sind Pflicht.',
+  },
+  {
+    title: 'Haftung & Sonderfälle',
+    content: 'Mod-Updates können jederzeit Neustarts verursachen. Neustarts werden meist 120 Sekunden vorher angekündigt. Keine Haftung für Loot-, Fahrzeug- oder Charakterverluste. Kein Anspruch auf Ersatz oder Bug-Befreiung. Nicht geregelte Fälle entscheidet das Server-Team verbindlich.',
+  },
+];
 ---
 
 <section id="rules" class="py-24 bg-surface/50 relative worn-texture">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="text-center mb-16">
-      <p class="hud-label mb-3">// {lang === 'de' ? 'REGELWERK' : 'REGULATIONS'} :: SEC.04</p>
-      <h2 class="text-4xl sm:text-5xl font-bold mb-4">{t('rules.title')}</h2>
-      <p class="text-text-secondary text-lg">{t('rules.subtitle')}</p>
+      <p class="hud-label mb-3">// REGELWERK :: SEC.04</p>
+      <h2 class="text-4xl sm:text-5xl font-bold mb-4">Serverregeln</h2>
+      <p class="text-text-secondary text-lg">Bitte lese und beachte unsere Regeln</p>
       <div class="mil-divider mt-6">
         <span class="w-2 h-2 rotate-45 bg-accent" />
       </div>

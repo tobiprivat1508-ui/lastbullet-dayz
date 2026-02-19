@@ -1,9 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import Button from './ui/Button.astro';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 ---
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -44,7 +40,7 @@ const t = useTranslations(lang);
     <div class="inline-flex items-center gap-3 px-5 py-2 rounded border border-white/10 bg-black/40 backdrop-blur-sm mb-8 animate-fade-in font-mono text-xs tracking-wider">
       <span class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-        <span class="text-accent-green uppercase">{t('hero.status')}: Online</span>
+        <span class="text-accent-green uppercase">Server Status: Online</span>
       </span>
       <span class="text-white/20">|</span>
       <span class="text-white/40">42/60</span>
@@ -57,26 +53,26 @@ const t = useTranslations(lang);
 
     <!-- Title -->
     <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter mb-4 animate-slide-up">
-      <span class="text-gradient">{t('hero.title')}</span>
+      <span class="text-gradient">LAST BULLET</span>
     </h1>
 
     <!-- Subtitle -->
     <p class="text-2xl sm:text-3xl font-light text-white/70 mb-6 animate-slide-up font-mono tracking-wide" style="animation-delay: 0.1s">
-      {t('hero.subtitle')}
+      Überlebe. Kämpfe. Herrsche.
     </p>
 
     <!-- Description -->
     <p class="text-lg text-white/40 max-w-2xl mx-auto mb-10 animate-slide-up" style="animation-delay: 0.2s">
-      {t('hero.description')}
+      Erlebe DayZ auf einem neuen Level. Hardcore PvP, einzigartige Mods und eine aktive Community warten auf dich.
     </p>
 
     <!-- CTA -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style="animation-delay: 0.3s">
       <Button variant="primary" size="lg" href="https://discord.gg/lastbullet-dayz">
-        {t('hero.cta')}
+        Jetzt beitreten
       </Button>
-      <Button variant="secondary" size="lg" href={`/${lang}/#features`}>
-        {t('nav.features')}
+      <Button variant="secondary" size="lg" href="/#features">
+        Features
       </Button>
     </div>
 

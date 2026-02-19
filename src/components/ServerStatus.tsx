@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { ServerStatus } from '../lib/types';
 
-interface Props {
-  lang: 'de' | 'en';
-}
-
-export default function ServerStatusComponent({ lang }: Props) {
+export default function ServerStatusComponent() {
   const [status, setStatus] = useState<ServerStatus | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,11 +34,6 @@ export default function ServerStatusComponent({ lang }: Props) {
     return () => clearInterval(interval);
   }, []);
 
-  const t = {
-    de: { online: 'Online', offline: 'Offline', players: 'Spieler', map: 'Karte', connect: 'Verbinden' },
-    en: { online: 'Online', offline: 'Offline', players: 'Players', map: 'Map', connect: 'Connect' },
-  }[lang];
-
   if (loading) {
     return (
       <div className="bg-[#141414] border border-[#2a2a2a] rounded-xl p-6 animate-pulse">
@@ -55,7 +46,7 @@ export default function ServerStatusComponent({ lang }: Props) {
   if (!status) {
     return (
       <div className="bg-[#141414] border border-[#2a2a2a] rounded-xl p-6 text-center">
-        <p className="text-[#666]">{lang === 'de' ? 'Server-Status nicht verfügbar' : 'Server status unavailable'}</p>
+        <p className="text-[#666]">Server-Status nicht verfügbar</p>
       </div>
     );
   }
@@ -77,13 +68,13 @@ export default function ServerStatusComponent({ lang }: Props) {
             : 'bg-red-500/10 text-red-500 border border-red-500/20'
         }`}>
           <span className={`w-2 h-2 rounded-full ${status.online ? 'bg-[#2ecc71] animate-pulse' : 'bg-red-500'}`} />
-          {status.online ? t.online : t.offline}
+          {status.online ? 'Online' : 'Offline'}
         </span>
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <p className="text-sm text-[#666] mb-1">{t.players}</p>
+          <p className="text-sm text-[#666] mb-1">Spieler</p>
           <p className="text-2xl font-bold">
             <motion.span
               key={status.players}
@@ -97,7 +88,7 @@ export default function ServerStatusComponent({ lang }: Props) {
           </p>
         </div>
         <div>
-          <p className="text-sm text-[#666] mb-1">{t.map}</p>
+          <p className="text-sm text-[#666] mb-1">Karte</p>
           <p className="text-lg font-medium">{status.map}</p>
         </div>
       </div>
@@ -121,7 +112,7 @@ export default function ServerStatusComponent({ lang }: Props) {
         onClick={() => navigator.clipboard.writeText(`${status.ip}:${status.port}`)}
         className="w-full py-2 bg-[#e8791d] hover:bg-[#f59e3f] text-white rounded-lg transition-colors font-medium text-sm cursor-pointer"
       >
-        {t.connect} — {status.ip}:{status.port}
+        Verbinden — {status.ip}:{status.port}
       </button>
     </motion.div>
   );

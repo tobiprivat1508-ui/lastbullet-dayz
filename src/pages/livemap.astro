@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import LiveMap from '../../components/LiveMap.tsx';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LiveMap from '../components/LiveMap.tsx';
 ---
 
 <BaseLayout title="Livemap - LAST BULLET DayZ" description="Interaktive Livemap von LAST BULLET DayZ. Erkunde die Chernarus-Karte mit Spielerpositionen und Points of Interest." keywords="DayZ Livemap, Chernarus Map, DayZ Karte, Last Bullet, iZurvive">
@@ -11,7 +11,7 @@ import LiveMap from '../../components/LiveMap.tsx';
         <p class="text-text-secondary text-lg">Interaktive Karte von Chernarus</p>
         <div class="w-20 h-1 bg-accent mx-auto mt-6 rounded-full" />
       </div>
-      <LiveMap lang="de" client:load />
+      <LiveMap client:load />
     </div>
   </div>
 </BaseLayout>

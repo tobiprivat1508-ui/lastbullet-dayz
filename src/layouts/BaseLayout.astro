@@ -3,7 +3,6 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ScrollToTop from '../components/ScrollToTop.astro';
-import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
   title: string;
@@ -12,20 +11,12 @@ interface Props {
   noindex?: boolean;
 }
 
-const lang = getLangFromUrl(Astro.url);
-
-const defaultDesc = lang === 'de'
-  ? 'LAST BULLET DayZ - Der ultimative Hardcore PvP Server. Erlebe intensive Feuergefechte, einzigartige Mods und eine aktive Community auf Chernarus.'
-  : 'LAST BULLET DayZ - The ultimate Hardcore PvP Server. Experience intense firefights, unique mods and an active community on Chernarus.';
-
 const {
   title,
-  description = defaultDesc,
+  description = 'LAST BULLET DayZ - Der ultimative Hardcore PvP Server. Erlebe intensive Feuergefechte, einzigartige Mods und eine aktive Community auf Chernarus.',
   keywords = 'DayZ, Server, PvP, Hardcore, Last Bullet, Chernarus, DayZ Server, Gaming, Survival',
   noindex = false,
 } = Astro.props;
-const otherLang = lang === 'de' ? 'en' : 'de';
-const currentPath = Astro.url.pathname.replace(`/${lang}`, '');
 const canonicalURL = new URL(Astro.url.pathname, 'https://lastbullet-dayz.eu');
 const ogImageURL = new URL('/images/og-image.webp', 'https://lastbullet-dayz.eu');
 
@@ -35,17 +26,12 @@ const jsonLd = {
   name: 'LAST BULLET DayZ',
   url: 'https://lastbullet-dayz.eu',
   description: 'LAST BULLET DayZ - Hardcore PvP Server',
-  inLanguage: [lang],
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `https://lastbullet-dayz.eu/${lang}/{search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
+  inLanguage: ['de'],
 };
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -68,19 +54,13 @@ const jsonLd = {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="LAST BULLET DayZ" />
-    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
-    <meta property="og:locale:alternate" content={lang === 'de' ? 'en_US' : 'de_DE'} />
+    <meta property="og:locale" content="de_DE" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL.href} />
-
-    <!-- hreflang -->
-    <link rel="alternate" hreflang="de" href={`https://lastbullet-dayz.eu/de${currentPath}`} />
-    <link rel="alternate" hreflang="en" href={`https://lastbullet-dayz.eu/en${currentPath}`} />
-    <link rel="alternate" hreflang="x-default" href={`https://lastbullet-dayz.eu/de${currentPath}`} />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

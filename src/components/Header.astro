@@ -1,17 +1,10 @@
 ---
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import LanguageSwitcher from './LanguageSwitcher.astro';
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-const rulesPath = lang === 'de' ? 'regeln' : 'rules';
 const navItems = [
-  { label: t('nav.about'), href: `/${lang}/#about` },
-  { label: t('nav.features'), href: `/${lang}/#features` },
-  { label: t('nav.rules'), href: `/${lang}/${rulesPath}` },
-  { label: t('nav.livemap'), href: `/${lang}/livemap` },
-  { label: t('nav.contact'), href: `/${lang}/#contact` },
+  { label: 'Über uns', href: '/#about' },
+  { label: 'Features', href: '/#features' },
+  { label: 'Regeln', href: '/regeln' },
+  { label: 'Livemap', href: '/livemap' },
+  { label: 'Kontakt', href: '/#contact' },
 ];
 ---
 
@@ -20,7 +13,7 @@ const navItems = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
-        <a href={`/${lang}/`} class="flex items-center gap-3 group shrink-0">
+        <a href="/" class="flex items-center gap-3 group shrink-0">
           <img src="/images/logo.png" alt="Last Bullet" class="w-10 h-10 rounded-lg object-cover group-hover:scale-110 transition-transform" />
           <span class="font-bold text-lg tracking-wider hidden sm:block">LAST BULLET</span>
         </a>
@@ -39,8 +32,6 @@ const navItems = [
 
         <!-- Actions -->
         <div class="flex items-center gap-3">
-          <LanguageSwitcher />
-
           <!-- Mobile menu button -->
           <button
             id="mobile-menu-btn"
