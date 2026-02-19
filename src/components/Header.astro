@@ -6,7 +6,7 @@ const navItems = [
   { label: 'Regeln', href: '/regeln' },
   { label: 'Monetarisierung', href: '/monetarisierung' },
   { label: 'Livemap', href: '/livemap' },
-  { label: 'Discord', href: '/#contact' },
+  { label: 'Discord', href: 'https://discord.gg/H52E8Qzmrd', external: true },
 ];
 ---
 
@@ -26,6 +26,8 @@ const navItems = [
             <a
               href={item.href}
               class="px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-white/5 rounded-lg transition-all duration-200"
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
             >
               {item.label}
             </a>
@@ -55,6 +57,8 @@ const navItems = [
           <a
             href={item.href}
             class="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-white/5 rounded-lg transition-colors"
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
           >
             {item.label}
           </a>

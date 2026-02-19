@@ -145,7 +145,7 @@ export default function ServerStatusComponent() {
         onClick={() => connectToServer(status.ip, status.port)}
         className="w-full py-2 bg-[#e8791d] hover:bg-[#f59e3f] text-white rounded-lg transition-colors font-medium text-sm cursor-pointer"
       >
-        Verbinden — {status.ip}:{status.port}
+        Verbinden
       </button>
     </motion.div>
   );

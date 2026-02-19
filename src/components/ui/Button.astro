@@ -4,9 +4,10 @@ interface Props {
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   class?: string;
+  external?: boolean;
 }
 
-const { variant = 'primary', size = 'md', href, class: className = '' } = Astro.props;
+const { variant = 'primary', size = 'md', href, class: className = '', external = false } = Astro.props;
 
 const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 cursor-pointer';
 
@@ -26,6 +27,6 @@ const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}
 const Tag = href ? 'a' : 'button';
 ---
 
-<Tag href={href} class={classes}>
+<Tag href={href} class={classes} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
   <slot />
 </Tag>
