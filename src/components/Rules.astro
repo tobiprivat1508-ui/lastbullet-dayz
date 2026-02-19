@@ -2,31 +2,74 @@
 const rules = [
   {
     title: 'Allgemeines',
-    content: 'Respekt & Fairness stehen an erster Stelle. Serverbelastende Aktionen oder Bauweisen sind verboten. Exploits, Glitches, Duping und Cheats sind strengstens untersagt. Bauen ist nur an physikalisch möglichen Positionen erlaubt. Server-Schilder sind bindend. Stream-Sniping ist verboten. Handlungen gegen Fairness oder gesunden Menschenverstand sind nicht erlaubt. Ausloggen in Bunkern, deren Umgebung oder Event-Locations ist untersagt.',
+    items: [
+      'Respekt & Fairness stehen an erster Stelle.',
+      'Serverbelastende Aktionen oder Bauweisen sind verboten.',
+      'Exploits, Glitches, Duping und Cheats sind strengstens untersagt.',
+      'Bauen ist nur an physikalisch möglichen Positionen erlaubt.',
+      'Server-Schilder sind bindend.',
+      'Stream-Sniping ist verboten.',
+      'Handlungen gegen Fairness oder gesunden Menschenverstand sind nicht erlaubt.',
+      'Ausloggen in Bunkern, deren Umgebung oder Event-Locations ist untersagt.',
+    ],
   },
   {
     title: 'Chat & Kommunikation',
-    content: 'Serversprache: Deutsch & Englisch. Keine Beleidigungen, Provokationen, Hetze, Diskriminierung, Spam, Capslock oder Regel-Diskussionen. PvP-, Raid- oder Kill-Situationen nicht im Global-Chat klären. Verdächtiges Verhalten nur über den Support melden. Keine PvP-Aufrufe im Global-Chat. Keine Weitergabe von Spieler-, Gruppen- oder Base-Positionen. Regelverstöße können zu Chat-Mutes führen.',
+    items: [
+      'Serversprache: Deutsch & Englisch.',
+      'Keine Beleidigungen, Provokationen, Hetze, Diskriminierung, Spam, Capslock oder Regel-Diskussionen.',
+      'PvP-, Raid- oder Kill-Situationen nicht im Global-Chat klären.',
+      'Verdächtiges Verhalten nur über den Support melden.',
+      'Keine PvP-Aufrufe im Global-Chat.',
+      'Keine Weitergabe von Spieler-, Gruppen- oder Base-Positionen.',
+      'Regelverstöße können zu Chat-Mutes führen.',
+    ],
   },
   {
     title: 'Spielverhalten & PvP',
-    content: 'Spiele fair, respektvoll und ehrenhaft. Safezone-Camping oder PvP in Safezones ist verboten. Wer einen Konflikt beginnt, muss mit Gegenwehr rechnen. Erhöhtes PvP bei Militärzonen, Basen, Missionen, Events & Airdrops. Gruppen dürfen sich nicht zusammenschließen!',
+    items: [
+      'Spiele fair, respektvoll und ehrenhaft.',
+      'Safezone-Camping oder PvP in Safezones ist verboten.',
+      'Wer einen Konflikt beginnt, muss mit Gegenwehr rechnen.',
+      'Erhöhtes PvP bei Militärzonen, Basen, Missionen, Events & Airdrops.',
+      'Gruppen dürfen sich nicht zusammenschließen!',
+    ],
   },
   {
     title: 'Beweissicherung',
-    content: 'PvP- & Kill-Aufzeichnungen werden dringend empfohlen. Fehlende Beweise können zu Entscheidungen zulasten des Angreifers führen.',
+    items: [
+      'PvP- & Kill-Aufzeichnungen werden dringend empfohlen.',
+      'Fehlende Beweise können zu Entscheidungen zulasten des Angreifers führen.',
+    ],
   },
   {
     title: 'Bauen & Basen',
-    content: 'Basengröße muss zur Spieleranzahl passen. Über 3 Stockwerke oder Umbauten an Map-Gebäuden nur mit Support-Genehmigung. Alle Bauteile benötigen festen Bodenkontakt. Mindestabstand zu Militär, Krankenhäusern, Polizeistationen, Händlern, Safezones, ATMs & Zementmischern: 500–1000 m. Kein Bauen an serverseitigen Orten (Bunker, Events etc.).',
+    items: [
+      'Basengröße muss zur Spieleranzahl passen.',
+      'Über 3 Stockwerke oder Umbauten an Map-Gebäuden nur mit Support-Genehmigung.',
+      'Alle Bauteile benötigen festen Bodenkontakt.',
+      'Mindestabstand zu Militär, Krankenhäusern, Polizeistationen, Händlern, Safezones, ATMs & Zementmischern: 500–1000 m.',
+      'Kein Bauen an serverseitigen Orten (Bunker, Events etc.).',
+    ],
   },
   {
     title: 'Raids & Safebases',
-    content: 'Raids sind erlaubt, wenn sie regelkonform ablaufen. Offene Türen oder Baufehler = Raid erlaubt. Ausloggen in fremden Basen nach Raids ist verboten. Raid-Aufzeichnungen sind Pflicht.',
+    items: [
+      'Raids sind erlaubt, wenn sie regelkonform ablaufen.',
+      'Offene Türen oder Baufehler = Raid erlaubt.',
+      'Ausloggen in fremden Basen nach Raids ist verboten.',
+      'Raid-Aufzeichnungen sind Pflicht.',
+    ],
   },
   {
     title: 'Haftung & Sonderfälle',
-    content: 'Mod-Updates können jederzeit Neustarts verursachen. Neustarts werden meist 120 Sekunden vorher angekündigt. Keine Haftung für Loot-, Fahrzeug- oder Charakterverluste. Kein Anspruch auf Ersatz oder Bug-Befreiung. Nicht geregelte Fälle entscheidet das Server-Team verbindlich.',
+    items: [
+      'Mod-Updates können jederzeit Neustarts verursachen.',
+      'Neustarts werden meist 120 Sekunden vorher angekündigt.',
+      'Keine Haftung für Loot-, Fahrzeug- oder Charakterverluste.',
+      'Kein Anspruch auf Ersatz oder Bug-Befreiung.',
+      'Nicht geregelte Fälle entscheidet das Server-Team verbindlich.',
+    ],
   },
 ];
 ---
@@ -57,9 +100,14 @@ const rules = [
             </svg>
           </summary>
           <div class="px-6 pb-6 pt-0">
-            <div class="pl-12 text-text-secondary leading-relaxed border-t border-border pt-4">
-              {rule.content}
-            </div>
+            <ul class="pl-12 text-text-secondary leading-relaxed border-t border-border pt-4 space-y-2 list-none">
+              {rule.items.map((item) => (
+                <li class="flex items-start gap-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent/60 shrink-0 mt-2" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </details>
       ))}
